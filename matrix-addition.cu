@@ -4,7 +4,7 @@
 #include <cuda.h>
 #include <cuda_runtime.h>
 
-#define BLOCKSIZE 256
+#define BLOCKSIZE 512
 
 __global__ void MatrixAddI(int *matrix1, int *matrix2, int *matrix3, int m, int n)
 {
@@ -179,30 +179,6 @@ void write_fmatrix(char *filename, int *m, int *n, float **values)
   else
   {
     printf("File write failed\n");
-  }
-}
-
-void add_imatrix(int **input1, int **input2, int **output, int *m, int *n)
-{
-  int i;
-	int t1, t2;
-	t1 = *m;
-	t2 = *n;
-  for(i = 0; i < t1*t2; i++)
-	{
-		*(*output+i) = *(*input1+i) + *(*input2+i);
-  }
-}
-
-void add_fmatrix(float **input1, float **input2, float **output, int *m, int *n)
-{
-	int i;
-	int t1, t2;
-	t1 = *m;
-	t2 = *n;
-  for(i = 0; i < t1*t2; i++)
-	{
-		*(*output+i) = *(*input1+i) + *(*input2+i);
   }
 }
 
