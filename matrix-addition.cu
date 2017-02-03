@@ -9,24 +9,20 @@
 __global__ void MatrixAddI(int *matrix1, int *matrix2, int *matrix3, int m, int n)
 {
 	int x = blockIdx.x * blockDim.x + threadIdx.x;
-	int y = blockIdx.y * blockDim.y + threadIdx.y;
 
-	if (x < m && y < n)
+	if (x < m*n)
 	{
-    int offset = ????;
-		matrix3[offset] = matrix1[offset] + matrix2[offset];
+		matrix3[x] = matrix1[x] + matrix2[x];
 	}
 }
 
 __global__ void MatrixAddF(float *matrix1, float *matrix2, float *matrix3, int m, int n)
 {
 	int x = blockIdx.x * blockDim.x + threadIdx.x;
-	int y = blockIdx.y * blockDim.y + threadIdx.y;
 
-	if (x < m && y < n)
+	if (x < m*n)
 	{
-    int offset = ????;
-		matrix3[offset] = matrix1[offset] + matrix2[offset];
+		matrix3[x] = matrix1[x] + matrix2[x];
 	}
 }
 
@@ -245,7 +241,7 @@ int main(int argc, char *argv[])
   	cudaMemcpy(devicematrix2, hostmatrix2, matrix_size, cudaMemcpyHostToDevice);
 		dim3 dimGrid(matrix_size/BLOCKSIZE, 1, 1);
 		dim3 dimBlock(BLOCKSIZE, 1, 1);
-		MatrixAdd <<< dimGrid, dimBlock >>> (devicematrix1, devicematrix2, devicematrix3, m1, n1);
+		MatrixAddF <<< dimGrid, dimBlock >>> (devicematrix1, devicematrix2, devicematrix3, m1, n1);
 		cudaMemcpy(hostmatrix3, devicematrix3, matrix_size, cudaMemcpyDeviceToHost);
   	write_matrix(argv[3], &m1, &n1, &hostmatrix3);
 		cudaFree(devicematrix1);
@@ -272,7 +268,7 @@ int main(int argc, char *argv[])
   	cudaMemcpy(devicematrix2, hostmatrix2, matrix_size, cudaMemcpyHostToDevice);
 		dim3 dimGrid(matrix_size/BLOCKSIZE, 1, 1);
 		dim3 dimBlock(BLOCKSIZE, 1, 1);
-		MatrixAdd <<< dimGrid, dimBlock >>> (devicematrix1, devicematrix2, devicematrix3, m1, n1);
+		MatrixAddI <<< dimGrid, dimBlock >>> (devicematrix1, devicematrix2, devicematrix3, m1, n1);
 		cudaMemcpy(hostmatrix3, devicematrix3, matrix_size, cudaMemcpyDeviceToHost);
   	write_matrix(argv[3], &m1, &n1, &hostmatrix3);
 		cudaFree(devicematrix1);
