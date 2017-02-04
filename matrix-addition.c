@@ -64,7 +64,7 @@ void read_imatrix(char *filename, int *m, int *n, int **values)
   else
   {
     printf("File read failed\n");
-		exit(1);
+    exit(1);
   }
 }
 
@@ -105,7 +105,7 @@ void read_fmatrix(char *filename, int *m, int *n, float **values)
   else
   {
     printf("File read failed\n");
-		exit(1);
+    exit(1);
   }
 }
 
@@ -144,7 +144,7 @@ void write_imatrix(char *filename, int *m, int *n, int **values)
   else
   {
     printf("File write failed\n");
-		exit(1);
+    exit(1);
   }
 }
 
@@ -184,7 +184,7 @@ void write_fmatrix(char *filename, int *m, int *n, float **values)
   else
   {
     printf("File write failed\n");
-		exit(1);
+    exit(1);
   }
 }
 
