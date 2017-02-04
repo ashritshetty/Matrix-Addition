@@ -209,7 +209,7 @@ int main(int argc, char *argv[])
   {
     float *hostmatrix1, *hostmatrix2, *hostmatrix3;
     float *devicematrix1, *devicematrix2, *devicematrix3;
-		int GRIDSIZE;
+    int GRIDSIZE;
     read_fmatrix(argv[1], &m1, &n1, &hostmatrix1);
     read_fmatrix(argv[2], &m2, &n2, &hostmatrix2);
     matrix_check(m1, n1, m2, n2);
@@ -220,7 +220,7 @@ int main(int argc, char *argv[])
     cudaMalloc(&devicematrix3, matrix_size);
     cudaMemcpy(devicematrix1, hostmatrix1, matrix_size, cudaMemcpyHostToDevice);
     cudaMemcpy(devicematrix2, hostmatrix2, matrix_size, cudaMemcpyHostToDevice);
-		GRIDSIZE = (int)ceil((float)(m1*n1)/BLOCKSIZE);
+    GRIDSIZE = (int)ceil((float)(m1*n1)/BLOCKSIZE);
     dim3 dimGrid(GRIDSIZE, 1, 1);
     dim3 dimBlock(BLOCKSIZE, 1, 1);
     MatrixAddF <<< dimGrid, dimBlock >>> (devicematrix1, devicematrix2, devicematrix3, m1, n1);
@@ -238,7 +238,7 @@ int main(int argc, char *argv[])
   {
     int *hostmatrix1, *hostmatrix2, *hostmatrix3;
     int *devicematrix1, *devicematrix2, *devicematrix3;
-		int GRIDSIZE;
+    int GRIDSIZE;
     read_imatrix(argv[1], &m1, &n1, &hostmatrix1);
     read_imatrix(argv[2], &m2, &n2, &hostmatrix2);
     matrix_check(m1, n1, m2, n2);
@@ -249,7 +249,7 @@ int main(int argc, char *argv[])
     cudaMalloc(&devicematrix3, matrix_size);
     cudaMemcpy(devicematrix1, hostmatrix1, matrix_size, cudaMemcpyHostToDevice);
     cudaMemcpy(devicematrix2, hostmatrix2, matrix_size, cudaMemcpyHostToDevice);
-		GRIDSIZE = (int)ceil((float)(m1*n1)/BLOCKSIZE);
+    GRIDSIZE = (int)ceil((float)(m1*n1)/BLOCKSIZE);
     dim3 dimGrid(GRIDSIZE, 1, 1);
     dim3 dimBlock(BLOCKSIZE, 1, 1);
     MatrixAddI <<< dimGrid, dimBlock >>> (devicematrix1, devicematrix2, devicematrix3, m1, n1);
